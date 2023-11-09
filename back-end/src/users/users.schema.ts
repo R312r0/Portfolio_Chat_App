@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import {Chat} from "../chats/chats.schema";
 
 export type UserDocument = HydratedDocument<User>;
 @Schema()
@@ -12,6 +13,10 @@ export class User {
 
     @Prop()
     nickName: string;
+
+    @Prop()
+    chats: Chat[]
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

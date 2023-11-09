@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import {InjectModel} from "@nestjs/mongoose";
-import {User} from "./users.schema";
+import {User, UserDocument} from "./users.schema";
 import {Model} from "mongoose";
 
 @Injectable()
@@ -17,5 +17,9 @@ export class UsersService {
 
   findAll() : Promise<User[]> {
     return this.userModel.find().exec();
+  }
+
+  findOne(id: string) : Promise<UserDocument> {
+    return this.userModel.findById(id);
   }
 }
