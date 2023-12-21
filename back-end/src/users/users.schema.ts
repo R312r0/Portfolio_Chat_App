@@ -15,7 +15,7 @@ export class User {
     nickName: string;
 
     @Prop()
-    chats: Chat[]
+    chatsIds: string[]
 
 }
 

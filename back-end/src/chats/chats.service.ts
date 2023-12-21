@@ -10,22 +10,10 @@ import {UsersService} from "../users/users.service";
 export class ChatsService {
   constructor(@InjectModel(Chat.name) private chatModel: Model<Chat>, private userService: UsersService ) {}
   async create(createChatDto: CreateChatDto) {
-
-    const users = await Promise.all(
-        createChatDto.owners.map((owner) => {
-              return this.userService.findOne(owner);
-            }
-        )
-    )
-
     const createdChat = new this.chatModel(createChatDto);
     await createdChat.save();
 
-    users.forEach(async (user) => {
-      await user.updateOne( {chats: [createdChat.id]})
-      await user.save()
-    })
-
+    await this.userService.updateUserChats(createChatDto.owners, createdChat.id);
     return "OK"
   }
 
