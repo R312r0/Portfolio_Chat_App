@@ -15,12 +15,12 @@ export const systemSlice = createSlice({
     name: 'system',
     initialState,
     reducers: {
-        doSmth: (state) => {
-            state.chats.push({_id: '1', messages: [], owners: ["_1"]})
-        }
+        // doSmth: (state) => {
+        //     state.chats.push({_id: '1', messages: [], owners: ["_1"]})
+        // }
     }
 })
 
-export const {doSmth} = systemSlice.actions;
+// export const {doSmth} = systemSlice.actions;
 
 export default systemSlice.reducer;

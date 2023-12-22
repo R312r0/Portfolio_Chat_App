@@ -12,9 +12,14 @@ export const chatsApi = createApi({
         getUsers: builder.query<User[], void>({
             query: () => 'users'
         }),
-
-        getUserChats: builder.query<Chat[], string>({
-            query: (name) => 'chats',
+        getUsersByIds: builder.query<User[], string[]>({
+            query: (usersIds) => ({
+                url: 'users/findByIds',
+                params: {userIds: [...usersIds]}
+            })
+        }),
+        getUserChats: builder.query<Chat[], void>({
+            query: () => 'chats',
             providesTags: ['Chats']
         }),
 
@@ -40,6 +45,7 @@ export const chatsApi = createApi({
 
 export const {
     useGetUsersQuery,
+    useGetUsersByIdsQuery,
     useGetUserChatsQuery,
     useAddNewChatMutation,
     useRemoveChatByIdMutation

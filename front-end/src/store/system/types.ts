@@ -7,7 +7,7 @@ export type User = {
 
 export type Chat = {
     _id: string,
-    owners: string[]
+    ownersId: string[]
     messages: []
 }
 
