@@ -26,6 +26,14 @@ export const chatsApi = createApi({
                 body: initialChat
             }),
             invalidatesTags: ['Chats']
+        }),
+        removeChatById: builder.mutation({
+            query: args => ({
+                url: '/chats',
+                method: 'DELETE',
+                params: {...args}
+            }),
+            invalidatesTags: ['Chats']
         })
     })
 })
@@ -33,5 +41,6 @@ export const chatsApi = createApi({
 export const {
     useGetUsersQuery,
     useGetUserChatsQuery,
-    useAddNewChatMutation
+    useAddNewChatMutation,
+    useRemoveChatByIdMutation
 } = chatsApi;

@@ -27,7 +27,13 @@ export class UsersService {
   async updateUserChats(userIds: string[], chatId: string) : Promise<void> {
     await this.userModel.updateMany({
       '_id': {$in : userIds.map(id => new Types.ObjectId(id))}
-    }, {$push: {ownersId: chatId}})
+    }, {$push: {chatsIds: chatId}})
+  }
+
+  async removeUserChats(chatId: string) : Promise<void> {
+    await this.userModel.updateMany({
+      'chatsIds': {$in: chatId}
+    }, {$pullAll: {chatsIds: [chatId]}})
   }
 
 

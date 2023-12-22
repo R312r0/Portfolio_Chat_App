@@ -13,7 +13,7 @@ export class ChatsService {
     const createdChat = new this.chatModel(createChatDto);
     await createdChat.save();
 
-    await this.userService.updateUserChats(createChatDto.owners, createdChat.id);
+    await this.userService.updateUserChats(createChatDto.ownersId, createdChat.id);
     return "OK"
   }
 
@@ -31,7 +31,9 @@ export class ChatsService {
     return `This action updates a #${id} chat`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} chat`;
+  async remove(id: string) {
+    await this.chatModel.findByIdAndDelete(id);
+    await this.userService.removeUserChats(id)
+    return 'OK';
   }
 }

@@ -14,7 +14,7 @@ const CreateChatModal = (props : CreateChatModalProps) => {
 
     const onNewChatSave = async (targetId: string) => {
         try {
-            await addNewChat({owners: [OUR_USER_ID, targetId]})
+            await addNewChat({ownersId: [OUR_USER_ID, targetId]})
         } catch (e) {
             console.log("Error unable to create new chat.")
         }
